@@ -1,0 +1,16 @@
+class Solution {
+public:
+    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+        if(headA==NULL||headB==NULL) return nullptr;//rememeber to write base
+    ListNode* ptrA=headA;
+    ListNode* ptrB=headB;
+    while(ptrA!=ptrB)//rememeber condition   
+    {
+        //ptrA=ptrA!=NULL?ptrA->next:ptrB;
+        ptrA=ptrA!=NULL?ptrA->next:headB;//very imp
+        //ptrB=ptrB!=NULL?ptrB->next:ptrA;
+        ptrB=ptrB!=NULL?ptrB->next:headA;
+    } 
+    return ptrA;
+    }
+};
