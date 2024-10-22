@@ -1,0 +1,44 @@
+class Solution {
+private:
+ListNode* reverseList(ListNode* head)
+{
+    ListNode* prev=nullptr;
+    ListNode* curr=head;
+    while(curr!=nullptr)
+    {
+        ListNode* next=curr->next;
+        curr->next=prev;
+        prev=curr;
+        curr=next;
+    }
+    return prev;
+}
+public:
+    bool isPalindrome(ListNode* head) {
+    if(head==nullptr||head->next==nullptr)    return true;
+    ListNode* slow=head;
+    ListNode* fast=head;
+    while(fast!=nullptr && fast->next!=nullptr)
+    {
+        slow=slow->next;
+        fast=fast->next->next;
+    }
+    ListNode* firstHalf=head;
+    ListNode* secondHalf=reverseList(slow);
+    bool isPal=true;
+    ListNode* firstHalfPtr=firstHalf;
+    ListNode* secondHalfPtr=secondHalf;
+    while(secondHalfPtr!=nullptr)
+    {
+        if(firstHalfPtr->val!=secondHalfPtr->val)
+        {
+            isPal=false;
+            break;
+        }
+        firstHalfPtr=firstHalfPtr->next;
+        secondHalfPtr=secondHalfPtr->next;
+    }
+    reverseList(secondHalf);
+    return isPal;
+    }
+};
